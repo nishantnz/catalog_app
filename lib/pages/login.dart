@@ -12,6 +12,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   String name = "";
+  bool obscureTexts = true;
   final specialCharacters = "%^@!()";
   bool changeButton = false;
   final _formKey = GlobalKey<FormState>();
@@ -85,12 +86,25 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       //password
                       TextFormField(
-                        obscureText: true,
+                        obscureText: obscureTexts,
                         style: TextStyle(fontSize: 20),
                         decoration: InputDecoration(
                           hintText: "Enter Password:",
                           labelText: "Password",
-                          // suffix: GestureDetector(,)
+                          suffixIcon: GestureDetector(
+                            onTap: () {
+                              obscureTexts
+                                  ? setState(() {
+                                      obscureTexts = false;
+                                    })
+                                  : setState(() {
+                                      obscureTexts = true;
+                                    });
+                            },
+                            child: obscureTexts
+                                ? Icon(Icons.remove_red_eye)
+                                : Icon(Icons.remove_red_eye_outlined),
+                          ),
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
