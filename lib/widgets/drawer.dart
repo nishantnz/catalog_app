@@ -23,6 +23,7 @@ class MyDrawer extends StatelessWidget {
                 currentAccountPicture: CircleAvatar(
                   backgroundImage: NetworkImage(imageUrl),
                 ),
+                // currentAccountPictureSize: Size.fromRadius(10),
               ),
             ),
             const ListTile(
