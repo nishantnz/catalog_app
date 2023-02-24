@@ -21,17 +21,24 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
+    /*for the progress bar to show
+    basically in the video he said that CatalogModel.items.length is null at the start
+    so to see that
+    */
+    await Future.delayed(Duration(seconds: 2));
     final catalogJson =
         await rootBundle.loadString("assets/files/catalog.json");
     final decodedData = jsonDecode(catalogJson);
     var productsData = decodedData["products"];
-    print(productsData);
+    CatalogModel.items = List.from(productsData)
+        .map<Item>((item) => Item.fromMap(item))
+        .toList();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    final dummyList =
-        List.generate(20, ((index) => CatalogModel.items[0]), growable: true);
+    var itemsCatalog = CatalogModel.items;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -40,14 +47,18 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: ListView.builder(
-          itemCount: dummyList.length,
-          itemBuilder: (context, index) {
-            return ItemWidget(
-              item: dummyList[index],
-            );
-          },
-        ),
+        child: itemsCatalog.isNotEmpty
+            ? ListView.builder(
+                itemCount: CatalogModel.items.length,
+                itemBuilder: (context, index) {
+                  return ItemWidget(
+                    item: CatalogModel.items[index],
+                  );
+                },
+              )
+            : Center(
+                child: CircularProgressIndicator(),
+              ),
       ),
       drawer: MyDrawer(),
     );
