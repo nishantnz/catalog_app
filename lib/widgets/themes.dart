@@ -6,11 +6,18 @@ class MyTheme {
         primarySwatch: Colors.deepPurple,
         fontFamily: GoogleFonts.lato().fontFamily,
         appBarTheme: AppBarTheme(
+          centerTitle: true,
+          //systemOverlayStyle: Overla ,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ),
+          ),
           color: Colors.white,
           elevation: 0,
           iconTheme: const IconThemeData(color: Colors.black),
           //toolbarTextStyle: Theme.of(context).textTheme.bodyText2,
-          titleTextStyle: Theme.of(context).textTheme.headline6,
+          titleTextStyle: Theme.of(context).textTheme.titleLarge,
         ),
       );
 
