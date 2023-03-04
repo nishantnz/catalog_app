@@ -39,121 +39,123 @@ class _LoginPageState extends State<LoginPage> {
     return Material(
         color: Colors.white,
         child: SingleChildScrollView(
-          child: Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/images/hey.png",
-                fit: BoxFit.cover,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "Welcome $name !",
-                style: TextStyle(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
+          child: Form(
+            child: Column(
+              //mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/images/hey.png",
+                  fit: BoxFit.cover,
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        style: TextStyle(fontSize: 20),
-                        decoration: InputDecoration(
-                          hintText: "Enter Username:",
-                          labelText: "Username",
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Username cannot be Empty";
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {
-                          name = value;
-                          setState(() {});
-                        },
-                      ),
-                      //password
-                      TextFormField(
-                        obscureText: obscureTexts,
-                        style: TextStyle(fontSize: 20),
-                        decoration: InputDecoration(
-                          hintText: "Enter Password:",
-                          labelText: "Password",
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              obscureTexts
-                                  ? setState(() {
-                                      obscureTexts = false;
-                                    })
-                                  : setState(() {
-                                      obscureTexts = true;
-                                    });
-                            },
-                            child: obscureTexts
-                                ? Icon(Icons.remove_red_eye)
-                                : Icon(Icons.remove_red_eye_outlined),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Password cannot be Empty";
-                          } else if (value.length < 6) {
-                            return "Password length should be atleast 6 characters";
-                          }
-                          //else if (!value.contains(specialCharacters) &&
-                          //     ) {
-                          //   return "Password should contain some Special characters";
-                          // }
-                          return null;
-                        },
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Material(
-                        color: Colors.deepPurple,
-                        borderRadius:
-                            BorderRadius.circular(changeButton ? 60 : 8),
-                        child: InkWell(
-                          //splashColor: Colors.red,
-                          onTap: (() => moveToHome()),
-                          child: AnimatedContainer(
-                            duration: Duration(seconds: 1),
-                            height: 60,
-                            width: changeButton ? 60 : 120,
-                            alignment: Alignment.center,
-                            child: changeButton
-                                ? Icon(
-                                    Icons.done,
-                                    color: Colors.white,
-                                  )
-                                : Text(
-                                    "Login",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                          ),
-                        ),
-                      )
-                    ],
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "Welcome $name !",
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 0, 0, 0),
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              )
-            ],
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          style: TextStyle(fontSize: 20),
+                          decoration: InputDecoration(
+                            hintText: "Enter Username:",
+                            labelText: "Username",
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Username cannot be Empty";
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            name = value;
+                            setState(() {});
+                          },
+                        ),
+                        //password
+                        TextFormField(
+                          obscureText: obscureTexts,
+                          style: TextStyle(fontSize: 20),
+                          decoration: InputDecoration(
+                            hintText: "Enter Password:",
+                            labelText: "Password",
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                obscureTexts
+                                    ? setState(() {
+                                        obscureTexts = false;
+                                      })
+                                    : setState(() {
+                                        obscureTexts = true;
+                                      });
+                              },
+                              child: obscureTexts
+                                  ? Icon(Icons.remove_red_eye)
+                                  : Icon(Icons.remove_red_eye_outlined),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Password cannot be Empty";
+                            } else if (value.length < 6) {
+                              return "Password length should be atleast 6 characters";
+                            }
+                            //else if (!value.contains(specialCharacters) &&
+                            //     ) {
+                            //   return "Password should contain some Special characters";
+                            // }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Material(
+                          color: Colors.deepPurple,
+                          borderRadius:
+                              BorderRadius.circular(changeButton ? 60 : 8),
+                          child: InkWell(
+                            //splashColor: Colors.red,
+                            onTap: (() => moveToHome()),
+                            child: AnimatedContainer(
+                              duration: Duration(seconds: 1),
+                              height: 60,
+                              width: changeButton ? 60 : 120,
+                              alignment: Alignment.center,
+                              child: changeButton
+                                  ? Icon(
+                                      Icons.done,
+                                      color: Colors.white,
+                                    )
+                                  : Text(
+                                      "Login",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ));
   }
