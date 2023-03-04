@@ -72,7 +72,16 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
-                        footer: Text(item.desc),
+                        footer: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: const BoxDecoration(
+                            color: Colors.black,
+                          ),
+                          child: Text(
+                            "\$${item.price}",
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
                         //!you can add gapless playback here afterwards
                         child: Image.network(item.image),
                       ),
