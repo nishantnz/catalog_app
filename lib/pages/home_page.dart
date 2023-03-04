@@ -39,28 +39,53 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var itemsCatalog = CatalogModel.items;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Catalog App",
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            "Catalog App",
+          ),
         ),
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: itemsCatalog.isNotEmpty
+              ? GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisSpacing: 17,
+                      crossAxisSpacing: 17,
+                      crossAxisCount: 2),
+                  itemBuilder: ((context, index) {
+                    var item = CatalogModel.items[index];
+                    return Card(
+                      clipBehavior: Clip.antiAlias,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      //elevation: 20,
+                      child: GridTile(
+                        header: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: const BoxDecoration(
+                            color: Colors.deepPurple,
+                          ),
+                          child: Text(
+                            item.name,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        footer: Text(item.desc),
+                        //!you can add gapless playback here afterwards
+                        child: Image.network(item.image),
+                      ),
+                    );
+                  }),
+                  itemCount: CatalogModel.items.length,
+                )
+              : const Center(
+                  child: CircularProgressIndicator(),
+                ),
+        ),
+        drawer: const MyDrawer(),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: itemsCatalog.isNotEmpty
-            ? ListView.builder(
-                itemCount: CatalogModel.items.length,
-                itemBuilder: (context, index) {
-                  return ItemWidget(
-                    item: CatalogModel.items[index],
-                  );
-                },
-              )
-            : Center(
-                child: CircularProgressIndicator(),
-              ),
-      ),
-      drawer: MyDrawer(),
     );
   }
 }
